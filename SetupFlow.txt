@@ -30,3 +30,38 @@ Phase 4: Production Ready
 ---------------------------------------------
 |       PHASE 1 : ARCHITECTURE DESIGN       |
 ---------------------------------------------
+
+1.Requirements Analysis
+
+-What services needed?
+-How do services communicate?
+-What data needs persistence?
+-What are security requirements?
+
+2.Service Decomposition
+
+-Define exact responsibilities for each service
+-Draw service boundaries (what each service does/doesn't do)
+-Design APIs between services
+-Identify shared resources (databases, volumes)
+-Apply single responsibility principle
+-Validate service separation makes sense
+
+3.Dependency Mapping
+
+-Identify which services need other services to function
+-Create dependency diagram/chart
+-Determine build order (which service to implement first)
+-Find critical path for development
+-Plan testing strategy based on dependencies
+-Identify potential bottlenecks
+
+4.Infrastructure Planning
+
+-Choose technology stack (ex:Node.js vs Python vs Java)
+-Design network architecture (how containers communicate)
+-Plan data storage (volumes, databases)
+-Design security setup (SSL, secrets, firewalls)
+-Write docker-compose.yml skeleton
+-Plan environment configuration (.env files)
+-Design deployment strategy
