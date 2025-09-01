@@ -33,9 +33,9 @@ Phase 4: Production Ready
 
 1.Requirements Analysis
 
--What services needed?
--How do services communicate?
--What data needs persistence?
+-What services needed?  -> MariaDB, NGINX, Wordpress
+-How do services communicate? -> 3
+-What data needs persistence? 
 -What are security requirements?
 
 2.Service Decomposition
