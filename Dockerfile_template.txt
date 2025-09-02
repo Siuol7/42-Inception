@@ -1,0 +1,49 @@
+# 1. Base Image  - Operating system for container
+FROM <base_image>:<tag>
+
+# 2. Metadata
+LABEL maintainer="your-email@example.com"
+LABEL version="1.0"
+LABEL description="Description of container"
+
+# 3. Arguments (build-time variables)
+ARG BUILD_ARG=default_value
+
+# 4. Environment Variables (runtime)
+ENV VARIABLE_NAME=value
+ENV PATH=/usr/local/bin:$PATH
+
+# 5. Install packages & dependencies
+RUN <install_commands> \
+    && <cleanup_commands>
+
+# 6. Copy files
+COPY <source> <destination>
+ADD <source_with_extract> <destination>
+
+# 7. Set working directory
+WORKDIR <directory>
+
+# 8. Create users/permissions
+RUN useradd -r <username>
+RUN chown -R <user>:<group> <directory>
+
+# 9. Create volumes (data persistence)
+VOLUME ["<mount_point>"]
+
+# 10. Switch user (security)
+USER <username>
+
+# 11. Expose ports
+EXPOSE <port>
+
+# 12. Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD <health_command> || exit 1
+
+# 13. Signal handling
+STOPSIGNAL SIGTERM
+
+# 14. Entry point & Command
+ENTRYPOINT ["executable"]
+CMD ["param1", "param2"]
