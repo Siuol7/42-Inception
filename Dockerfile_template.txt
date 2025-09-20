@@ -1,15 +1,18 @@
 # 1. Base Image  - Operating system for container
 FROM <base_image>:<tag>
+  +base_image = operating system
+  +tag = version
+Ex: FROM debian:buster
 
-# 2. Metadata
+# 2. Metadata - <information about the container's image> -> no impact on operation
 LABEL maintainer="your-email@example.com"
 LABEL version="1.0"
 LABEL description="Description of container"
 
-# 3. Arguments (build-time variables)
+# 3. Arguments (build-time variables) -> used only in building image
 ARG BUILD_ARG=default_value
 
-# 4. Environment Variables (runtime)
+# 4. Environment Variables (runtime) -> used in run container process
 ENV VARIABLE_NAME=value
 ENV PATH=/usr/local/bin:$PATH
 

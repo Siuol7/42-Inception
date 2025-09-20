@@ -1,0 +1,26 @@
+Docker-compose: Instructions to orchestrate multiple services
+
+Image:  Templates of services
+
+    + 1 image = 1 service template (not multiple containers in 1 image)
+    + Multiple containers can be created FROM 1 image
+
+    + Building image:
+        dockerfileFROM debian:buster          # ← Get base OS
+        RUN apt-get update                    # ← Update package list  
+        RUN apt-get install -y mariadb-server # ← Install MariaDB
+        COPY config.conf /etc/mysql/          # ← Copy config files
+        ENV MYSQL_ROOT_PASSWORD=secret        # ← Set default env
+        CMD ["mysqld"]                        # ← Set default command
+
+Containers: Actual runtime processes for services
+    🔄 Relationship:
+    1 Docker-compose → Multiple services
+    1 Service → 1 Image template  
+    1 Image → Can create multiple containers (instances)
+    1 Container → 1 running process
+    📊 Example:
+    docker-compose.yml:
+    ├── mariadb service → mariadb image → mariadb container(s)
+    ├── wordpress service → wordpress image → wordpress container(s)
+    └── nginx service → nginx image → nginx container(s)
