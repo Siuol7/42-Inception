@@ -11,18 +11,46 @@ LABEL description="Description of container"
 
 # 3. Arguments (build-time variables) -> used only in building image
 ARG BUILD_ARG=default_value
+Ex:
+    ARG VERSION=10.6
+    ARG USER_ID=1000
+
+    FROM mariadb:${VERSION}           # ← Dùng khi build image
+    RUN useradd -u ${USER_ID} mysql   # ← Dùng khi build image
 
 # 4. Environment Variables (runtime) -> used in run container process
 ENV VARIABLE_NAME=value
 ENV PATH=/usr/local/bin:$PATH
+Ex:
+    ENV MYSQL_ROOT_PASSWORD=secret123
+    ENV MYSQL_DATABASE=wordpress_db
 
 # 5. Install packages & dependencies
 RUN <install_commands> \
     && <cleanup_commands>
+Ex:
+    # Package installation
+    RUN apt-get update \
+        && apt-get install -y \
+            mariadb-server \
+            mariadb-client \
+            wget \
+            curl \
+        && rm -rf /var/lib/apt/lists/*
 
-# 6. Copy files
+    # Compile from source
+    RUN wget https://source.tar.gz \
+        && tar -xzf source.tar.gz \
+        && cd source \
+        && make install \
+        && cd .. \
+        && rm -rf source*
+
+# 6. Copy files -> customize specific configs -> service config
 COPY <source> <destination>
 ADD <source_with_extract> <destination>
+Ex:
+    COPY my-custom.conf /etc/mysql/ 
 
 # 7. Set working directory
 WORKDIR <directory>
