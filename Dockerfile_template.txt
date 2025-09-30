@@ -52,7 +52,7 @@ ADD <source_with_extract> <destination>
 Ex:
     COPY my-custom.conf /etc/mysql/ 
 
-# 7. Set working directory
+# 7. Set working directory -> set default working directory ->auto cd to 
 WORKDIR <directory>
 
 # 8. Create users/permissions
@@ -75,6 +75,6 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 # 13. Signal handling
 STOPSIGNAL SIGTERM
 
-# 14. Entry point & Command
+# 14. Entry point & Command -> set up cmds auto run when start container
 ENTRYPOINT ["executable"]
 CMD ["param1", "param2"]
