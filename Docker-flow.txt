@@ -1,0 +1,7 @@
+1. Docker architecture
+2. Config file for services
+3. Script for services
+4. Dockerfile
+5. Docker compose
+6. env
+7. Build & test
