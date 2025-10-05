@@ -18,3 +18,5 @@ mariadbd --user=mysql --bootstrap <<EOF
 	FLUSH PRIVILEGES;
 EOF
 
+# Run in the foreground
+exec mariadbd --user=mysql --console
