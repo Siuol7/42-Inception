@@ -1,0 +1,30 @@
+[mysqld]
+
+# Basic Settings
+user					= mysql
+pid-file				= /var/run/mysqld/mysqld.pid
+basedir					= /usr
+datadir					= /var/lib/mysql
+tmpdir					= /tmp
+lc-messages-dir			= /usr/share/mysql
+lc-messages				= en_US
+
+# Disable external file locking to improve performance -> 1 container 1 MySql instance
+skip-external-locking
+
+# Allow connections from all IPs
+bind-address			= 0.0.0.0
+
+# Enable user privilege checks
+skip-grant-tables		= 0
+
+# Character sets
+character-set-server	= utf8mb4
+
+# Use case-insensitive Unicode string comparison
+collation-server		= utf8mb4_general_ci
+
+# InnoDB: Allocate 1GB RAM for InnoDB data cache
+innodb_buffer_pool_size	= 1G
+
+log_error				= /var/log/mysql/error.log
