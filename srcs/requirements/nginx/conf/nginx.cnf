@@ -1,0 +1,43 @@
+#Block connection to HTTP (non-secure) by return error 403
+server {
+    listen 80; #HTTP port
+    listen [::]:80; # IPv6
+    server_name ${DOMAIN_NAME};
+
+    return 403; #Forbiden connection
+}
+# Define the HTTPS virtual host
+server {
+    listen 443 ssl; # on port 443 with SSL enabled (IPv4)
+    listen [::]:443 ssl; # IPv6
+    server_name ${DOMAIN_NAME};
+
+        # SSL (Secure Sockets Layer) certificates
+        ssl_certificate /etc/nginx/ssl/cert.crt; #code to encrypt
+        ssl_certificate_key /etc/nginx/ssl/cert.key; #code to decrypt
+
+        # TLS (Transport Layer Security) configuation
+        ssl_protocols TLSv1.2 TLSv1.3;
+        ssl_prefer_server_ciphers on;
+
+        # TLS1.3: [TLS]_[EncryptionAlgo][Auth]: [TLS]_[AES_256GCM][SHA384]
+        # TLS1.2: [Key-Exhcnage]-[Encryption-Algo]-[Auth]: [ECDHE-RSA]-[AES256-GCM]-[SHA384]
+        ssl_ciphers "TLS_AES_256_GCM_SHA384:TLS_AES_128_GCM_SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256";
+
+    # Set the web root directory for serving files
+    root /var/www/html;
+
+    # Default files to load when accessing a directory
+    index index.php index.html index.htm;
+    
+    #  Check if file or directory exists; if not, return 404
+    location / {
+        try_files $uri $uri/ =404;
+    }
+    # PHP-FPM: Handle PHP files using FastCGI (linked to the WordPress service)
+    location ~ \.php$ {
+        include fastcgi.conf;
+        fastcgi_pass wordpress:9000;
+        fastcgi_index index.php;
+    }
+}
