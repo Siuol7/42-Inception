@@ -1,0 +1,6 @@
+Server -> create private & public key
+
+Client -> connect website -> send to server
+Server process handshake phase with client -> send private key to client
+
+Private key + Public key -> Session key to encrypt and decrypt
