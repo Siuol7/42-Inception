@@ -5,7 +5,9 @@ set -e
 # -days 365 -> valid 365 days
 # create new pair key , rsa algorithm,2048 bits
 # nodes -> nginx read directly -> not require password
-#
+# -keyout /etc/nginx/ssl/cert.key -> dir for private key
+# -out /etc/nginx/ssl/cert.crt -> dir for cert (publickey, domain name, validity dates, signatures)
+# -subj "/CN=$DOMAIN_NAME" -> create subject -> verify domain valid (CN = common name (domain), O = organization, C = country, ST = state)
 
 openssl req -x509 \ 
 			-days 365 \
@@ -20,5 +22,5 @@ chmod 600 /etc/nginx/ssl/cert.key
 # Certificate readable by everyone (644)
 chmod 644 /etc/nginx/ssl/cert.crt
 
-# Run in the foreground: override the default config and prevent daemonizing
+# Run in the foreground -> nginx replaces script pid -> container will not stop
 exec nginx -g "daemon off;"
