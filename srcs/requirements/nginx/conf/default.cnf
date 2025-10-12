@@ -18,6 +18,8 @@ server {
 
         # TLS (Transport Layer Security) configuation
         ssl_protocols TLSv1.2 TLSv1.3;
+        
+        # Server decide cipher(encrypt algo)
         ssl_prefer_server_ciphers on;
 
         # TLS1.3: [TLS]_[EncryptionAlgo][Auth]: [TLS]_[AES_256GCM][SHA384]
