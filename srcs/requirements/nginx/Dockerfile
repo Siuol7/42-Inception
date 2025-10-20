@@ -11,15 +11,15 @@ RUN apk update && \
     mkdir -p /etc/nginx/ssl && \
     adduser -D -H -u 82 -s /sbin/nologin www-data
 
-# Copy main config (có user www-data;)
+# Copy our custom config -> replace alpine default config
 COPY conf/nginx.conf /etc/nginx/nginx.conf
-
-# Copy server blocks
 COPY conf/default.conf /etc/nginx/http.d/default.conf
 
+#Copy script to script dir for container 
 COPY tools/entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
+#notify this container use HTTPS port
 EXPOSE 443
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
