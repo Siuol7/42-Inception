@@ -41,14 +41,17 @@ if [ ! -e .firstmount ]; then
             --admin_password="$WP_ADMIN_PASSWORD" \
             --admin_email="$WP_ADMIN_EMAIL"
         
-        
+        #Create a second user
         ./wp-cli.phar user create --allow-root \
             "$WP_USER" "$WP_USER_EMAIL" \
             --role="$WP_USER_ROLE" \
             --user_pass="$WP_USER_PASSWORD"
     fi
     
+    #change owners of all files in html to www-data
     chown -R www-data:www-data /var/www/html
+
+    #set permission
     chmod -R 775 /var/www/html/wp-content
     
     touch .firstmount
