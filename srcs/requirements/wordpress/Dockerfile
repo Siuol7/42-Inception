@@ -32,6 +32,7 @@ COPY conf/www.conf /etc/php83/php-fpm.d/
 
 COPY tools/entrypoint.sh /usr/local/bin/
 
+#Set permission for script, find and replace memory limit upto 512, if not exist then added to last row
 RUN chmod +x /usr/local/bin/entrypoint.sh && \
 	sed -i '/^memory_limit\s*=/c\memory_limit = 512M' /etc/php83/php.ini || \
 	echo "memory_limit = 512M" >> /etc/php83/php.ini
