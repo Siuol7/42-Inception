@@ -18,12 +18,18 @@ RUN apk update && \
 	chown -R www-data:www-data /var/www/html && \
 	chmod -R 755 /var/www/html
 
+#Set working dir (~cd)
 WORKDIR /var/www/html
 
+#Download wp-cli.phar with original name by curl tool and set permission executable
+#WP-CLI -> set up wordpress by cmd line
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 	chmod +x wp-cli.phar
 
+#Copy custom config instead of using alpine default config
 COPY conf/www.conf /etc/php83/php-fpm.d/
+
+
 COPY tools/entrypoint.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/entrypoint.sh && \
