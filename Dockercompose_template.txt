@@ -2,11 +2,11 @@
 # DOCKER COMPOSE FILE STRUCTURE
 # ============================================
 
-# 1. Version (optional trong v2+, bỏ qua được)
+# 1. Version (Docker compose file format version, optional in v2+)
 version: '3.8'
 
 # ============================================
-# 2. SERVICES - Định nghĩa containers
+# 2. SERVICES - Define containers
 # ============================================
 services:
   
