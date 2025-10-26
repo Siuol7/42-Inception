@@ -1,0 +1,184 @@
+# ============================================
+# DOCKER COMPOSE FILE STRUCTURE
+# ============================================
+
+# 1. Version (optional trong v2+, bỏ qua được)
+version: '3.8'
+
+# ============================================
+# 2. SERVICES - Định nghĩa containers
+# ============================================
+services:
+  
+  # ─────────────────────────────────────────
+  # SERVICE 1: Example Service
+  # ─────────────────────────────────────────
+  service_name:
+    
+    # 2.1 Container name (optional)
+    container_name: my_container_name
+    
+    # 2.2 Build configuration
+    build:
+      context: ./path/to/dockerfile/directory    # Build context
+      dockerfile: Dockerfile                      # Dockerfile name (default: Dockerfile)
+      args:                                       # Build arguments (ARG)
+        BUILD_ARG1: value1
+        BUILD_ARG2: value2
+    
+    # 2.3 Or use pre-built image
+    # image: nginx:alpine
+    
+    # 2.4 Environment variables (ENV)
+    environment:
+      ENV_VAR1: value1
+      ENV_VAR2: value2
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}       # From .env file
+    
+    # 2.5 Environment file
+    env_file:
+      - .env                                      # Load from .env file
+    
+    # 2.6 Ports mapping (HOST:CONTAINER)
+    ports:
+      - "80:80"                                   # HTTP
+      - "443:443"                                 # HTTPS
+    
+    # 2.7 Volumes (data persistence)
+    volumes:
+      - volume_name:/container/path               # Named volume
+      - ./host/path:/container/path               # Bind mount
+      - /absolute/path:/container/path            # Absolute path
+    
+    # 2.8 Networks
+    networks:
+      - network_name
+    
+    # 2.9 Dependencies (start order)
+    depends_on:
+      - other_service_name
+    
+    # 2.10 Restart policy
+    restart: always                               # always | on-failure | unless-stopped | no
+    
+    # 2.11 Secrets (sensitive data)
+    secrets:
+      - secret_name
+    
+    # 2.12 Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    # 2.13 Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # 2.14 Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          memory: 256M
+    
+    # 2.15 Working directory
+    working_dir: /app
+    
+    # 2.16 User
+    user: "1000:1000"                             # UID:GID
+    
+    # 2.17 Command override
+    command: ["nginx", "-g", "daemon off;"]
+    
+    # 2.18 Entrypoint override
+    entrypoint: ["/entrypoint.sh"]
+    
+    # 2.19 Expose ports (documentation only)
+    expose:
+      - "3306"
+    
+    # 2.20 Extra hosts
+    extra_hosts:
+      - "somehost:162.242.195.82"
+      - "otherhost:50.31.209.229"
+
+  # ─────────────────────────────────────────
+  # SERVICE 2: Another Service
+  # ─────────────────────────────────────────
+  another_service:
+    image: alpine:latest
+    networks:
+      - network_name
+    depends_on:
+      - service_name
+
+# ============================================
+# 3. VOLUMES - Named volumes definition
+# ============================================
+volumes:
+  volume_name:                                    # Named volume
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /host/path
+  
+  another_volume:                                 # Simple named volume
+
+# ============================================
+# 4. NETWORKS - Network definition
+# ============================================
+networks:
+  network_name:
+    driver: bridge                                # bridge | host | overlay | none
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
+  
+  another_network:
+    external: true                                # Use existing network
+
+# ============================================
+# 5. SECRETS - Sensitive data
+# ============================================
+secrets:
+  secret_name:
+    file: ./secrets/secret_file.txt               # From file
+  
+  another_secret:
+    external: true                                # External secret
+
+# ============================================
+# 6. CONFIGS - Configuration files
+# ============================================
+configs:
+  config_name:
+    file: ./config/my_config.conf
+  
+  another_config:
+    external: true
+
+# ============================================
+# COMMON DOCKER COMPOSE COMMANDS
+# ============================================
+# docker-compose up                 # Start services
+# docker-compose up -d              # Start in detached mode
+# docker-compose up --build         # Rebuild images
+# docker-compose down               # Stop and remove
+# docker-compose down -v            # Stop and remove volumes
+# docker-compose ps                 # List services
+# docker-compose logs               # View logs
+# docker-compose logs -f            # Follow logs
+# docker-compose exec service bash  # Execute command in service
+# docker-compose restart            # Restart services
+# docker-compose stop               # Stop services
+# docker-compose start              # Start stopped services
