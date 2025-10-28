@@ -6,7 +6,7 @@
 version: '3.8'
 
 # ============================================
-# 2. SERVICES - Define containers
+# 2. SERVICES - Define containers | Declare service
 # ============================================
 services:
   
