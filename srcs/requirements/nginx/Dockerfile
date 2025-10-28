@@ -22,4 +22,4 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 #notify this container use HTTPS port
 EXPOSE 443
 
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/nginxEntrypoint.sh"]

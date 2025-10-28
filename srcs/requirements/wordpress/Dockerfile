@@ -37,4 +37,4 @@ RUN chmod +x /usr/local/bin/entrypoint.sh && \
 	sed -i '/^memory_limit\s*=/c\memory_limit = 512M' /etc/php83/php.ini || \
 	echo "memory_limit = 512M" >> /etc/php83/php.ini
 	
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/wordpressEntrypoint.sh"]
