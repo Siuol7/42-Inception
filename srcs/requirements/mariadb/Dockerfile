@@ -14,4 +14,4 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 
 EXPOSE 3306
 
-ENTRYPOINT ["/usr/local/bin/mariaEntrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/mariaEntrypoint.sh"] 
