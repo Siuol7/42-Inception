@@ -30,7 +30,7 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 COPY conf/www.conf /etc/php83/php-fpm.d/
 
 
-COPY tools/entrypoint.sh /usr/local/bin/
+COPY tools/wordpressEntrypoint.sh /usr/local/bin/
 
 #Set permission for script, find and replace memory limit upto 512, if not exist then added to last row
 RUN chmod +x /usr/local/bin/entrypoint.sh && \

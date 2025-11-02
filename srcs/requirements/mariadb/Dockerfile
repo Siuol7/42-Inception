@@ -7,10 +7,10 @@ RUN apk update && \
 	chown -R mysql:mysql /var/lib/mysql /run/mysqld /var/log/mysql && \
 	mariadb-install-db --user=mysql --datadir=/var/lib/mysql
 
-COPY conf/mariadb.cnf /etc/my.cnf.d/
+COPY conf/mariadb.conf /etc/my.cnf.d/
 COPY tools/mariaEntrypoint.sh /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/mariaEntrypoint.sh
 
 EXPOSE 3306
 
