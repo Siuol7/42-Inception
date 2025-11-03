@@ -32,7 +32,7 @@ services:
       - mariadb
     restart: always
     environment:
-      MYSQL_DB: ${MYSQL_DB}
+      MYSQL_DB: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_HOST: mariadb
@@ -51,7 +51,7 @@ services:
       - inception_network
     restart: always
     environment:
-      MYSQL_DB: ${MYSQL_DB}
+      MYSQL_DB: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
