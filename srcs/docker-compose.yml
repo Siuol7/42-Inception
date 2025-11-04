@@ -34,7 +34,6 @@ services:
     environment:
       MYSQL_DB: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_HOST: mariadb
     secrets:
       - wordpress_admin_password
@@ -53,8 +52,6 @@ services:
     environment:
       MYSQL_DB: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
 
 volumes:
   wordpress_data:

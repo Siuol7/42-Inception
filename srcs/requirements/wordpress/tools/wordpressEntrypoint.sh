@@ -9,9 +9,24 @@ if [ ! -e .firstmount ]; then
     
     if [ -f /run/secrets/wordpress_admin_password ]; then
         WP_ADMIN_PASSWORD="$(cat /run/secrets/wordpress_admin_password)"
+    else
+        echo "ERROR: wordpress_admin_password not found!"
+        exit 1
     fi
+    
     if [ -f /run/secrets/wordpress_user_password ]; then
         WP_USER_PASSWORD="$(cat /run/secrets/wordpress_user_password)"
+    else
+        echo "ERROR: wordpress_user_password not found!"
+        exit 1
+    fi
+    
+    # ===== THÊM ĐOẠN NÀY =====
+    if [ -f /run/secrets/db_password ]; then
+        MYSQL_PASSWORD="$(cat /run/secrets/db_password)"
+    else
+        echo "ERROR: db_password not found!"
+        exit 1
     fi
     
     #Check if mariadb alive -> wait until mariadb ready 
