@@ -42,7 +42,7 @@ if [ ! -e .firstmount ]; then
 
         #create config file -> wordpress knows where to get database
         ./wp-cli.phar config create --allow-root \
-            --dbname="$MYSQL_DATABASE" \
+            --dbname="$MYSQL_DB" \
             --dbuser="$MYSQL_USER" \
             --dbpass="$MYSQL_PASSWORD" \
             --dbhost="$MYSQL_HOST"

@@ -97,7 +97,6 @@ fclean: down
 	@echo "$(RED)Full clean: Removing everything...$(NC)"
 	docker system prune -af --volumes
 	@sudo rm -rf $(DATA_DIR)
-	@rm -rf srcs/secrets
 	@echo "$(RED)✓ Full clean completed$(NC)"
 
 # Rebuild

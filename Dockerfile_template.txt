@@ -23,7 +23,7 @@ ENV VARIABLE_NAME=value
 ENV PATH=/usr/local/bin:$PATH
 Ex:
     ENV MYSQL_ROOT_PASSWORD=secret123
-    ENV MYSQL_DATABASE=wordpress_db
+    ENV MYSQL_DB=wordpress_db
 
 # 5. Install packages & dependencies
 RUN <install_commands> \

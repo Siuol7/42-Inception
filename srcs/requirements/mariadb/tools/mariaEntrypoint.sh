@@ -2,6 +2,20 @@
 
 set -e #exit when ever error
 
+if [ -f /run/secrets/db_password ]; then
+    MYSQL_PASSWORD="$(cat /run/secrets/db_password)"
+else
+    echo "ERROR: db_password secret not found!"
+    exit 1
+fi
+
+if [ -f /run/secrets/db_root_password ]; then
+    MYSQL_ROOT_PASSWORD="$(cat /run/secrets/db_root_password)"
+else
+    echo "ERROR: db_root_password secret not found!"
+    exit 1
+fi
+
 #bootstrap mode -> run sql init from heredoc
 mariadbd --user=mysql --bootstrap <<EOF
 	USE mysql;

@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   
   nginx:
@@ -32,9 +30,16 @@ services:
       - mariadb
     restart: always
     environment:
-      MYSQL_DB: ${MYSQL_DATABASE}
+      MYSQL_DB: ${MYSQL_DB}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_HOST: mariadb
+      WORDPRESS_URL: ${WORDPRESS_URL}
+      WORDPRESS_TITLE: ${WORDPRESS_TITLE}
+      WORDPRESS_ADMIN: ${WORDPRESS_ADMIN}
+      WORDPRESS_ADMIN_EMAIL: ${WORDPRESS_ADMIN_EMAIL}
+      WORDPRESS_USER: ${WORDPRESS_USER}
+      WORDPRESS_USER_EMAIL: ${WORDPRESS_USER_EMAIL}
+      WORDPRESS_USER_ROLE: ${WORDPRESS_USER_ROLE}
     secrets:
       - wordpress_admin_password
       - wordpress_user_password
@@ -51,7 +56,7 @@ services:
       - inception_network
     restart: always
     environment:
-      MYSQL_DB: ${MYSQL_DATABASE}
+      MYSQL_DB: ${MYSQL_DB}
       MYSQL_USER: ${MYSQL_USER}
     secrets:
       - db_password
